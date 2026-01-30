@@ -1,5 +1,6 @@
 @echo off
 setlocal EnableDelayedExpansion
+set "BluetoothDeviceInstancePath=INSERT_PATH_HERE"
 
 :: Check admin permissions, otherwise you can't start any services
 net session >nul 2>&1
@@ -25,6 +26,9 @@ for /f "tokens=*" %%S in ('reg query HKLM\SYSTEM\CurrentControlSet\Services ^| f
 	echo Found service: !SERVICE!
 	net start "!SERVICE!" /y
 )
+
+pnputil /disable-device "%BluetoothDeviceInstancePath%"
+pnputil /enable-device "%BluetoothDeviceInstancePath%"
 
 echo.
 echo Done! Your Bluetooth services should be running.
