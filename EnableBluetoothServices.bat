@@ -30,6 +30,7 @@ for /f "tokens=*" %%S in ('reg query HKLM\SYSTEM\CurrentControlSet\Services ^| f
 echo Restarting Bluetooth Hardware...
 :: Restarts the bluetooth device
 pnputil /disable-device "%BluetoothDeviceInstancePath%"
+timeout /t 3 /nobreak >nul
 pnputil /enable-device "%BluetoothDeviceInstancePath%"
 
 echo.
@@ -37,3 +38,4 @@ echo Done! Your Bluetooth services should be running.
 
 
 exit
+
